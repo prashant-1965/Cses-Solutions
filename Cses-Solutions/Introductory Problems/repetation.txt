@@ -1,0 +1,25 @@
+import java.lang.management.MemoryType;
+import java.util.*;
+import java.lang.*;
+ 
+public class Main {
+    static final int MOD = (int)1e9 + 7;
+    public static void main(String[] args) {
+        solve();
+    }
+ 
+    public static void solve() {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        int ans=0,slow=0;
+        for(int i=1;i<s.length();i++){
+            if(s.charAt(i-1)!=s.charAt(i)){
+                ans = Math.max(ans,i-slow);
+                slow=i;
+            }
+        }
+        ans = Math.max(ans,s.length()-slow);
+        System.out.println(ans);
+        sc.close();
+    }
+}
