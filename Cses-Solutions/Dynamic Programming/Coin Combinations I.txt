@@ -1,0 +1,53 @@
+import java.util.*;
+import java.lang.*;
+ 
+public class Main {
+    static final int MOD = (int)1e9 + 7;
+    public static void main(String[] args) {
+        solve();
+    }
+ 
+//    Optimised II because of Stack Overflow
+    public static void solve() {
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt();
+        int k = sc.nextInt();
+        int[] nums = new int[size];
+        for(int i=0;i<size;i++){
+            nums[i] = sc.nextInt();
+        }
+        int[] dp = new int[k+1];
+        dp[0]=1;
+        for(int i=1;i<=k;i++) {
+            for (int j = 0; j < nums.length; j++){
+                if(i-nums[j]>=0) dp[i] = (dp[i] + dp[i-nums[j]]) % MOD;
+            }
+        }
+        System.out.println(dp[k]);
+        sc.close();
+    }
+ 
+//    Optimised I because of brute force
+//    public static void solve() {
+//        Scanner sc = new Scanner(System.in);
+//        int size = sc.nextInt();
+//        int k = sc.nextInt();
+//        int[] nums = new int[size];
+//        for(int i=0;i<size;i++){
+//            nums[i] = sc.nextInt();
+//        }
+//        Integer[][] dp = new Integer[size][k+1];
+//        System.out.println(dfs(0,k,nums,dp));
+//        sc.close();
+//    }
+//    public static int dfs(int idx, int k, int[] nums, Integer[][] dp){
+//        if(k==0) return 1;
+//        if(k<0) return 0;
+//        if(dp[idx][k]!=null) return dp[idx][k];
+//        int cnt=0;
+//        for(int i=0;i<nums.length;i++){
+//            cnt+=dfs(i,k-nums[i],nums,dp);
+//        }
+//        return dp[idx][k] =  cnt;
+//    }
+}
