@@ -1,0 +1,58 @@
+import java.util.*;
+import java.lang.*;
+ 
+public class Main {
+    static final int MOD = (int)1e9 + 7;
+    public static void main(String[] args) {
+        solve();
+    }
+ 
+//    Optimised III because of Stack Overflow
+    public static void solve() {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        int[] dp = new int[num+1];
+        dp[0]=1;
+        for(int i=1;i<=num;i++){
+            for(int j=1;j<=i && j<=6;j++){
+                dp[i]= (dp[i]+dp[i-j])%MOD;
+            }
+        }
+        System.out.println(dp[num]);
+        sc.close();
+    }
+ 
+//    Optimised II  because of two variables in dfs
+//    public static void solve() {
+//        Scanner sc = new Scanner(System.in);
+//        int num = sc.nextInt();
+//        Integer[] dp = new Integer[num+1];
+//        System.out.println(dfs(num,dp));
+//        sc.close();
+//    }
+//    public static int dfs(int num, Integer[] dp){
+//        if(num==0) return 1;
+//        if(num<0) return 0;
+//        if(dp[num]!=null) return dp[num];
+//        int total=0;
+//        for(int i=1;i<=6;i++){
+//            total = (total + dfs(num - i, dp)) % MOD;
+//        }
+//        return dp[num] =  total;
+//    }
+ 
+//    Optimised I because of brute force
+//    public static void solve() {
+//        Scanner sc = new Scanner(System.in);
+//        int num = sc.nextInt();
+//        Integer[][] dp = new Integer[num+1][num+1];
+//        System.out.println(dfs(1,num,dp));
+//        sc.close();
+//    }
+//    public static int dfs(int idx, int num, Integer[][] dp){
+//        if(num==0) return 1;
+//        if(num<0 || idx>num || idx>6) return 0;
+//        if(dp[idx][num]!=null) return dp[idx][num];
+//        return dp[idx][num] = dfs(1,num-idx,dp)%MOD+dfs(idx+1,num,dp)%MOD;
+//    }
+}
