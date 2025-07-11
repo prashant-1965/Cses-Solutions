@@ -1,0 +1,49 @@
+import java.util.*;
+import java.lang.*;
+ 
+public class Main {
+    static final int MOD = (int)1e9 + 7;
+    public static void main(String[] args) {
+        solve();
+    }
+ 
+    public static void solve() {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        int sum = (num*(num+1))/2;
+        if((sum&1)==1){
+            System.out.println("NO");
+        }else{
+            int size1=1,size2=0;
+            StringBuilder sb1 = new StringBuilder();
+            sb1.append(num).append(" ");
+            StringBuilder sb2 = new StringBuilder();
+            boolean flag = true;
+            for (int i=num-1;i>0;i-=2){
+                if(flag){
+                    sb2.append(i).append(" ");
+                    if(i-1>0){
+                        sb2.append(i - 1).append(" ");
+                        size2++;
+                    }
+                    size2++;
+                    flag =false;
+                }else{
+                    sb1.append(i).append(" ");
+                    if(i-1>0){
+                        sb1.append(i-1).append(" ");
+                        size1++;
+                    }
+                    size1++;
+                    flag = true;
+                }
+            }
+            System.out.println("YES");
+            System.out.println(size1);
+            System.out.println(sb1);
+            System.out.println(size2);
+            System.out.println(sb2);
+        }
+        sc.close();
+    }
+}
