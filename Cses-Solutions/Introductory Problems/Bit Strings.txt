@@ -1,0 +1,21 @@
+import java.util.*;
+import java.lang.*;
+ 
+public class Main {
+    static final int MOD = (int)1e9 + 7;
+    public static void main(String[] args) {
+        solve();
+    }
+ 
+    public static void solve() {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        long[] dp = new long[num+1];
+        dp[1]=2;
+        for(int i=2;i<=num;i++){
+            dp[i] = (dp[i-1]*2)%MOD;
+        }
+        System.out.println(dp[num]);
+        sc.close();
+    }
+}
