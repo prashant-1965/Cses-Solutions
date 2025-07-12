@@ -1,0 +1,52 @@
+import java.sql.SQLOutput;
+import java.util.*;
+import java.lang.*;
+ 
+public class Main {
+    static final int MOD = (int)1e9 + 7;
+    public static void main(String[] args) {
+        solve();
+    }
+ 
+    public static void solve() {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        int[] track = new int[26];
+        for(int i=0;i<s.length();i++){
+            track[s.charAt(i)-'A']++;
+        }
+        int cnt=0;
+        boolean flag = true;
+        for(int i:track){
+            if(i%2==1){
+                cnt++;
+            }
+            if(cnt==2){
+                System.out.println("NO SOLUTION");
+                flag = false;
+                break;
+            }
+        }
+        if(flag){
+            cnt=-1;
+            StringBuilder sb1 = new StringBuilder();
+            StringBuilder sb2 = new StringBuilder();
+            for(int i=0;i<26;i++){
+                int val = track[i] / 2;
+                for (int j = 0; j < val; j++) {
+                    sb1.append((char)(i+'A'));
+                    sb2.append((char)(i+'A'));
+                }
+                if(track[i]%2==1){
+                    cnt=i;
+                }
+            }
+            if(cnt!=-1){
+                sb1.append((char)(cnt+'A'));
+            }
+            sb1.append(sb2.reverse());
+            System.out.println(sb1);
+        }
+        sc.close();
+    }
+}
