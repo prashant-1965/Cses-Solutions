@@ -1,0 +1,26 @@
+import java.lang.management.MemoryType;
+import java.util.*;
+import java.lang.*;
+ 
+public class Main {
+    static final int MOD = (int)1e9 + 7;
+    public static void main(String[] args) {
+        solve();
+    }
+    public static void solve() {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        if(num<5){
+            System.out.println(0);
+        }else {
+            int cnt=0;
+            while( num>=5)
+            {
+                cnt+=(num/5);
+                num/=5;
+            }
+            System.out.println(cnt);
+        }
+        sc.close();
+    }
+ }
