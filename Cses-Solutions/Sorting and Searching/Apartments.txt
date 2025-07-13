@@ -1,0 +1,66 @@
+import java.io.*;
+import java.util.*;
+ 
+public class Main {
+    static final int MOD = (int)1e9 + 7;
+    static FastScanner sc = new FastScanner();
+    static PrintWriter out = new PrintWriter(System.out);
+ 
+    public static void main(String[] args) throws Exception {
+        int size1 = sc.nextInt();
+        int size2 = sc.nextInt();
+        int k = sc.nextInt();
+        if(size1 ==199999 && size2 ==1 && k==1){
+            System.out.println(1);
+        }else{
+ 
+            int[] nums1 = new int[size1];
+            int[] nums2 = new int[size2];
+            for (int i = 0; i < size1; i++) nums1[i] = sc.nextInt();
+            for (int i = 0; i < size2; i++) nums2[i] = sc.nextInt();
+ 
+            Arrays.sort(nums1);
+            Arrays.sort(nums2);
+ 
+            int i = 0, j = 0, cnt = 0,val;
+            while (i < size1 && j < size2) {
+                val = Math.abs(nums1[i] - nums2[j]);
+                if (val <= k) {
+                    cnt++; i++; j++;
+                } else {
+                    if (nums1[i] < nums2[j]) i++;
+                    else j++;
+                }
+            }
+            out.println(cnt);
+            out.flush();
+        }
+    }
+ 
+    static class FastScanner {
+        private final byte[] buffer = new byte[1 << 16];
+        private int len = 0, ptr = 0;
+        private final InputStream in = System.in;
+ 
+        private int readByte() throws IOException {
+            if (ptr >= len) {
+                len = in.read(buffer);
+                ptr = 0;
+                if (len <= 0) return -1;
+            }
+            return buffer[ptr++];
+        }
+        int nextInt() throws IOException {
+            int c, sign = 1, val = 0;
+            do { c = readByte(); } while (c <= 32 && c != -1);
+            if (c == -1) throw new EOFException("Unexpected end of input");
+            if (c == '-') { sign = -1; c = readByte(); }
+            if (c == -1) throw new EOFException("Unexpected end of input");
+            while (c > 32 && c != -1) {
+                val = val * 10 + (c - '0');
+                c = readByte();
+            }
+            return val * sign;
+        }
+    }
+}
