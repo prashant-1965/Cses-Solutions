@@ -1,0 +1,109 @@
+import java.io.*;
+public class Main {
+    static final FastScanner sc = new FastScanner();
+    static final PrintWriter out = new PrintWriter(System.out);
+    static final int MOD = (int)1e9 + 7;
+    public static Integer[][] dp;
+    public static int[] nums;
+ 
+    public static void main(String[] args) throws Exception {
+        solve();
+        out.flush();
+    }
+ 
+//    Optimised II for k<=10^6
+    public static void solve() throws IOException {
+        int size = sc.nextInt();
+        int k = sc.nextInt();
+        nums = new int[size];
+        for(int i=0;i<size;i++){
+            nums[i] = sc.nextInt();
+        }
+        int[] dp = new int[k+1];
+        dp[0]=1;
+        for(int i:nums){
+            for(int j=i;j<=k;j++){
+                dp[j] = (dp[j]+dp[j-i])%MOD;
+            }
+        }
+        out.println(dp[k]);
+    }
+ 
+//    Optimised I for k<=10^3
+//    public static void solve() throws IOException{
+//        Scanner sc = new Scanner(System.in);
+//        int size = sc.nextInt();
+//        int k = sc.nextInt();
+//        int[] nums = new int[size];
+//        for(int i=0;i<size;i++){
+//            nums[i] = sc.nextInt();
+//        }
+//        Integer[][] dp = new Integer[size][k+1];
+//        out.println(dfs(0,nums,k,dp));
+//    }
+//    public static int dfs(int idx, int[] nums, int k, Integer[][] dp){
+//        if(k==0) return 1;
+//        if(idx==nums.length || k<0) return 0;
+//        if(dp[idx][k]!=null) return dp[idx][k] %MOD;
+//        return dp[idx][k] = dfs(idx,nums,k-nums[idx],dp)%MOD+dfs(idx+1,nums,k,dp)%MOD;
+//    }
+ 
+//    Brute Force  for input 2^k<500
+//    public static void solve() throws IOException{
+//        Scanner sc = new Scanner(System.in);
+//        int size = sc.nextInt();
+//        int k = sc.nextInt();
+//        int[] nums = new int[size];
+//        for(int i=0;i<size;i++){
+//            nums[i] = sc.nextInt();
+//        }
+//        out.println(dfs(0,nums,k));
+//    }
+//    public static int dfs(int idx, int[] nums, int k){
+//        if(k==0) return 1;
+//        if(idx==nums.length || k<0) return 0;
+//        return dfs(idx,nums,k-nums[idx])%MOD+dfs(idx+1,nums,k)%MOD;
+//    }
+    static final class FastScanner {
+        private final byte[] buf = new byte[1 << 16];
+        private int len, ptr;
+        private final InputStream in = System.in;
+ 
+        private int readByte() throws IOException {
+            if (ptr >= len) {
+                len = in.read(buf);
+                ptr = 0;
+                if (len <= 0) return -1;
+            }
+            return buf[ptr++];
+        }
+ 
+        int nextInt() throws IOException {
+            int c, sign = 1, val = 0;
+            do { c = readByte(); } while (c <= 32 && c != -1);
+            if (c == '-') { sign = -1; c = readByte(); }
+            while (c > 32 && c != -1) {
+                val = val * 10 + (c - '0');
+                c = readByte();
+            }
+            return val * sign;
+        }
+ 
+        String nextLine() throws IOException {
+            int c = readByte();
+            while (c == '\n' || c == '\r') c = readByte();
+            StringBuilder sb = new StringBuilder();
+            while (c != '\n' && c != '\r' && c != -1) {
+                sb.append((char) c);
+                c = readByte();
+            }
+            return sb.toString();
+        }
+ 
+        char nextChar() throws IOException {
+            int c = readByte();
+            while (c <= 32 && c != -1) c = readByte();
+            return (char) c;
+        }
+    }
+]
