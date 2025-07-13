@@ -1,0 +1,51 @@
+import java.io.*;
+import java.util.*;
+ 
+public class Main {
+    static final int MOD = (int)1e9 + 7;
+    static FastScanner sc = new FastScanner();
+    static PrintWriter out = new PrintWriter(System.out);
+ 
+    public static void main(String[] args) throws Exception {
+        int size = sc.nextInt();
+        int[] nums = new int[size];
+        for(int i=0;i<size;i++){
+            nums[i] = sc.nextInt();
+        }
+        Set<Integer> set=  new HashSet<>();
+        for(int i:nums){
+            if(!set.contains(i)) set.add(i);
+        }
+            out.println(set.size());
+            out.flush();
+    }
+ 
+ 
+    // ---- super‑fast byte scanner ----
+    static class FastScanner {
+        private final byte[] buffer = new byte[1 << 16];
+        private int len = 0, ptr = 0;
+        private final InputStream in = System.in;
+ 
+        private int readByte() throws IOException {
+            if (ptr >= len) {
+                len = in.read(buffer);
+                ptr = 0;
+                if (len <= 0) return -1;
+            }
+            return buffer[ptr++];
+        }
+        int nextInt() throws IOException {
+            int c, sign = 1, val = 0;
+            do { c = readByte(); } while (c <= 32 && c != -1);
+            if (c == -1) throw new EOFException("Unexpected end of input");
+            if (c == '-') { sign = -1; c = readByte(); }
+            if (c == -1) throw new EOFException("Unexpected end of input");
+            while (c > 32 && c != -1) {
+                val = val * 10 + (c - '0');
+                c = readByte();
+            }
+            return val * sign;
+        }
+    }
+}
