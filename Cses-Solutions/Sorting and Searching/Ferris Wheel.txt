@@ -1,0 +1,89 @@
+import java.io.*;
+import java.util.Arrays;
+ 
+public class Main {
+    static final FastScanner sc = new FastScanner();
+    static final PrintWriter out = new PrintWriter(System.out);
+    static final int MOD = (int) 1e9 + 7;
+    public static Integer[][] dp;
+    public static Integer[] nums;
+    public static int ans = 0;
+ 
+    public static void main(String[] args) throws Exception {
+        solve();
+        out.flush();
+    }
+ 
+    public static void solve() throws IOException {
+        int size = sc.nextInt();
+        int k = sc.nextInt();
+        nums = new Integer[size];
+        for (int i = 0; i < size; i++) {
+            nums[i] = sc.nextInt();
+        }
+        Arrays.sort(nums);
+        int low = 0, high = size - 1;
+        while (low < high) {
+            if (nums[low] + nums[high] <= k) {
+                ans++;
+                low++;
+                high--;
+            } else if (nums[low] + nums[high] > k) {
+                ans++;
+                high--;
+            }
+        }
+        if (low == high) {
+            if (nums[low] <= k) ans++;
+        }
+        out.println(ans);
+    }
+ 
+    static final class FastScanner {
+        private final byte[] buf = new byte[1 << 16];
+        private int len, ptr;
+        private final InputStream in = System.in;
+ 
+        private int readByte() throws IOException {
+            if (ptr >= len) {
+                len = in.read(buf);
+                ptr = 0;
+                if (len <= 0) return -1;
+            }
+            return buf[ptr++];
+        }
+ 
+        int nextInt() throws IOException {
+            int c, sign = 1, val = 0;
+            do {
+                c = readByte();
+            } while (c <= 32 && c != -1);
+            if (c == '-') {
+                sign = -1;
+                c = readByte();
+            }
+            while (c > 32 && c != -1) {
+                val = val * 10 + (c - '0');
+                c = readByte();
+            }
+            return val * sign;
+        }
+ 
+        String nextLine() throws IOException {
+            int c = readByte();
+            while (c == '\n' || c == '\r') c = readByte();
+            StringBuilder sb = new StringBuilder();
+            while (c != '\n' && c != '\r' && c != -1) {
+                sb.append((char) c);
+                c = readByte();
+            }
+            return sb.toString();
+        }
+ 
+        char nextChar() throws IOException {
+            int c = readByte();
+            while (c <= 32 && c != -1) c = readByte();
+            return (char) c;
+        }
+    }
+}
