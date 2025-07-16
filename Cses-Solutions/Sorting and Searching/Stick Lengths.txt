@@ -1,0 +1,119 @@
+import java.io.*;
+import java.util.*;
+ 
+public class Main {
+    static final FastScanner sc = new FastScanner();
+    static final PrintWriter out = new PrintWriter(System.out);
+ 
+    public static Integer[][] dp;
+    public static int[] nums;
+    public static Integer[] arr;
+    public static int[] nums2;
+ 
+    static final int MOD = (int)1e9 + 7;
+    public static int size;
+    public static int size2;
+    public static long ans=0L;
+    public static int k;
+    public static int tc;
+    public static int low;
+    public static int high;
+    public static int mid;
+    public static int val;
+    public static int temp;
+ 
+    public static StringBuilder sb;
+    public static List<Integer> lt;
+    public static Set<Integer> set;
+    public static Map<Integer,Integer> map;
+ 
+ 
+    public static void main(String[] args) throws Exception {
+        solve();
+        out.flush();
+    }
+    public static void solve() throws IOException {
+        size = sc.nextInt();
+        arr = new Integer[size];
+        for(int i=0;i<size;i++)arr[i] = sc.nextInt();
+        Arrays.sort(arr);
+        mid = arr[size/2];
+        for(Integer i:arr)ans+=Math.abs(i-mid);
+        out.println(ans);
+    }
+ 
+ 
+    static final class FastScanner {
+        private final byte[] buf = new byte[1 << 16];
+        private int len, ptr;
+        private final InputStream in = System.in;
+ 
+        private final char[] tok = new char[1 << 16];
+        private int tokLen;
+ 
+        private int readByte() throws IOException {
+            if (ptr >= len) {
+                len = in.read(buf);
+                ptr = 0;
+                if (len <= 0) return -1;
+            }
+            return buf[ptr++];
+        }
+ 
+        int nextInt() throws IOException {
+            int c, sign = 1, val = 0;
+            do { c = readByte(); } while (c <= 32 && c != -1);
+            if (c == '-') { sign = -1; c = readByte(); }
+            while (c > 32 && c != -1) {
+                val = val * 10 + (c - '0');
+                c = readByte();
+            }
+            return val * sign;
+        }
+ 
+        String nextLine() throws IOException {
+            int c = readByte();
+            while (c == '\n' || c == '\r') c = readByte();
+            StringBuilder sb = new StringBuilder();
+            while (c != '\n' && c != '\r' && c != -1) {
+                sb.append((char) c);
+                c = readByte();
+            }
+            return sb.toString();
+        }
+ 
+        long nextLong() throws IOException {
+            int c; long sign = 1, val = 0;
+            do { c = readByte(); } while (c <= 32 && c != -1);
+            if (c == '-') { sign = -1; c = readByte(); }
+            while (c > 32 && c != -1) {
+                val = val * 10 + (c - '0');
+                c = readByte();
+            }
+            return val * sign;
+        }
+ 
+        char nextChar() throws IOException {
+            int c = readByte();
+            while (c <= 32 && c != -1) c = readByte();
+            return (char) c;
+        }
+ 
+        private void loadToken() throws IOException {
+            tokLen = 0;
+            int c = readByte();
+            while (c <= 32 && c != -1) c = readByte();
+            while (c > 32 && c != -1) {
+                tok[tokLen++] = (char) c;
+                c = readByte();
+            }
+        }
+ 
+        char nextCharAt(int idx) throws IOException {
+            loadToken();
+            if (idx < 0 || idx >= tokLen) throw new IndexOutOfBoundsException();
+            return tok[idx];
+        }
+        int currentTokenLength() { return tokLen; }
+    }
+}
